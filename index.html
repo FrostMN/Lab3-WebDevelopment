@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul id="list">
+    </ul>
+    <input type="text" id="text">
+    <button onclick="addToList()">add</button>
+
+
+
+
+    <p>Star Wars: Phantom Menace, <span id="1S" class="rating">1 stars</span></p>
+
+    <p>Back to the Future 3, <span id="2S" class="rating">2 stars</span></p>
+
+    <p>Star Wars: Revenge of the Sith, <span id="3S" class="rating">3 stars</span></p>
+
+    <p>Back to the Future, <span id="4S" class="rating">4 stars</span></p>
+
+    <p>Star Wars: Empire Strikes Back, <span id="5S" class="rating">5 stars</span></p>
+
+    <p id="width"></p>
+    <p id="height"></p>
+    <p id="win_px"></p>
+
+
+
+    <h4>Colors</h4>
+    <p id="randColor">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pharetra at ex sit amet vulputate. Etiam ipsum justo, rhoncus nec bibendum vitae, mattis maximus justo. Sed rutrum in tortor vel auctor. Nam nec semper eros, sed varius massa. Pellentesque efficitur, erat ut egestas iaculis, augue velit egestas lorem, nec ullamcorper lectus lorem luctus urna. Suspendisse euismod finibus porttitor. Nullam at arcu sit amet nisl molestie porttitor ut sed nisi. Quisque et diam ac nibh mattis malesuada sit amet id sem.</p>
+    <button onclick="randColor()">Random Color</button> | <span id="rgbCode">R: 0 G: 0 B: 0</span>
+
+
+
+
+    <script>
+        document.getElementById("1S").innerHTML = "★";
+        document.getElementById("2S").innerHTML = "★★";
+        document.getElementById("3S").innerHTML = "★★★";
+        document.getElementById("4S").innerHTML = "★★★★";
+        document.getElementById("5S").innerHTML = "★★★★★";
+
+
+
+        var width_para = document.getElementById("width");
+        var width_of_window = window.innerWidth;
+
+        var height_para = document.getElementById("height");
+        var height_of_window = window.innerHeight;
+
+        var window_px_para = document.getElementById("win_px");
+        var px_of_window = height_of_window * width_of_window;
+
+        width_para.innerHTML = "Width = " + width_of_window;
+        height_para.innerHTML = "Height = " + height_of_window;
+        window_px_para.innerHTML = "Pixels = " + px_of_window;
+
+
+        // The element resize event is called onresize; or for the addEventListener, resize.
+        // You can add the listener to the whole window.
+
+
+        window.addEventListener("resize", windowWasResized);
+        function windowWasResized() {
+            // In Chrome, you actually get two events when the window is re-sized,
+            // so you'll see two alerts. This shouldn't affect the lab question.
+            width_para = document.getElementById("width");
+            width_of_window = window.innerWidth;
+            width_para.innerHTML = "Width = " + width_of_window;
+
+            height_para = document.getElementById("height");
+            height_of_window = window.innerHeight;
+            height_para.innerHTML = "Height = " + height_of_window;
+
+            window_px_para = document.getElementById("win_px");
+            px_of_window = height_of_window * width_of_window;
+            window_px_para.innerHTML = "Pixels = " + px_of_window;
+        }
+
+
+
+
+        function addToList() {
+        var my_list_element = document.getElementById("list");
+        var new_list_item = document.createElement("li");
+        var new_list_text = document.getElementById("text").value;
+        if (validateLength(new_list_text)) {
+            new_list_item.innerHTML = new_list_text;
+            my_list_element.appendChild(new_list_item);
+            document.getElementById("text").value = "";
+        }
+    }
+
+    function validateLength(str) {
+        if (str.length > 0 && str.length <= 50) {
+            return true;
+        } else if (str.length > 50) {
+            alert("Please enter a message shorter than 50 characters")
+        }
+        return false;
+    }
+
+    function randColor() {
+        var lorem = document.getElementById("randColor");
+
+        var r = Math.floor(Math.random() * 255);   //Pick a random number between 0 and 1
+        var g = Math.floor(Math.random() * 255);   //Multiply by 255 to get a number in the correct range
+        var b = Math.floor(Math.random() * 255);   //Then convert it to an int
+        //Colors can be created as "rgb(33, 52, 15)" where the numbers are R, G, B values.
+        //This is expected as a string.
+        var colorString = "rgb(" + r + ", " + g + ", " + b + ")";
+
+        lorem.style.color = colorString;
+        showColor(r, g, b);
+    }
+
+    function showColor(r, g, b) {
+        var rgbStr = document.getElementById("rgbCode");
+        rgbStr.innerHTML = "R: " + r + " G: " + g + " B: " + b;
+    }
+
+</script>
+
+</body>
+</html>
